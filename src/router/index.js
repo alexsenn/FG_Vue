@@ -1,22 +1,35 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from '@/views/Home.vue'
+import Vue from "vue";
+import Router from "vue-router";
+import Template from "@/views/Template.vue";
+import Home from "@/views/pages/Home.vue";
+import Quadras from "@/views/pages/Quadras.vue";
+import PostDetails from "@/components/PostDetails.vue";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
-    routes: [
+  routes: [
+    {
+      path: "/",
+      name: "home",
+      component: Template,
+      children: [
         {
-            path: '/',
-            name: 'home',
-            component: Home
+          path: "",
+          component: Home
         },
         {
-            path: '/post/:postIndex?',
-            name: 'post',
-            component: () => import('@/components/PostDetails.vue'),
-            props: true
+          path: "quadras",
+          component: Quadras
         }
-    ],
-    mode: 'history'
-})
+      ]
+    },
+    {
+      path: "/post/:postIndex?",
+      name: "post",
+      component: PostDetails,
+      props: true
+    }
+  ]
+  //mode: "history"
+});
